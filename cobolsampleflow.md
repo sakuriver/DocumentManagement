@@ -40,7 +40,7 @@ classDiagram
 |  KFSB06000-E | SERVER:DBキューのメッセージ書込みに失敗しました。 | 
 
 
-# データ変換処理(cash register , e money ) → digital transaction data
+## データ変換処理(cash register , e money ) → digital transaction data
 ```mermaid
 sequenceDiagram
     participant ConvertPc
@@ -50,4 +50,11 @@ sequenceDiagram
     ConvertPc->>ConvertPc: input sale to database sale
     ConvertPc->>ConvertPc: input servicename to database servicename
 
+```
+
+## データ巻き戻し(Rollback)
+```mermaid
+flowchart TB
+    c1-->a2
+    c1-->c2
 ```
