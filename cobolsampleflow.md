@@ -55,6 +55,68 @@ sequenceDiagram
 ## データ巻き戻し(Rollback)
 ```mermaid
 flowchart TB
-    c1-->a2
-    c1-->c2
+    messageerr-->errorset
+    errorset-->arg1set
+    arg1set-->arg2set
+    messageok-->errorend
+```
+
+## 保存処理への送信(send to message)
+```mermaid
+flowchart TB
+    start-->senddatasetting
+    senddatasetting-->flagset
+    flagset-->putdatalen
+    putdata-->putdatabody
+```
+
+## データ発行
+```mermaid
+flowchart TB
+    start-->messagesend
+    messagesend-->send-resultcheck
+    messagesend-->send-rollback
+    send-resultcheck-->end
+    send-rollback-->end
+
+```
+
+## 集計用コンピュータの呼び出し(Recmote Procedure Call)
+```mermaid
+flowchart TB
+    strart-->indata-setting
+    indata-setting-->indata-lensetting
+    indata-lensetting-->rpc-flag-set
+    rpc-flag-set-->rpc-svname
+    rpc-svname-->rpc-svgroup
+    rpc-svgroup-->rpc-data-len
+    rpc-data-len-->call-rpc
+    call-rpc-->send-resultcheck
+    call-rpc-->send-rollback
+    send-resultcheck-->end
+    send-rollback-->end
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```mermaid
 ```
