@@ -76,8 +76,8 @@ flowchart TB
     start-->messagesend
     messagesend-->send-resultcheck
     messagesend-->send-rollback
-    send-resultcheck-->end
-    send-rollback-->end
+    send-resultcheck-->append
+    send-rollback-->append
 
 ```
 
@@ -93,30 +93,9 @@ flowchart TB
     rpc-data-len-->call-rpc
     call-rpc-->send-resultcheck
     call-rpc-->send-rollback
-    send-resultcheck-->end
-    send-rollback-->end
+    send-resultcheck-->append
+    send-rollback-->append
 ```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```mermaid
-```
