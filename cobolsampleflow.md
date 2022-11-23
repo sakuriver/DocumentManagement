@@ -18,6 +18,8 @@ classDiagram
 
 ## コンビニ売上や、ネット決済などのサービス名が追加される(sale payment service name add tax or business)
 ```mermaid
+
+classDiagram
     class ServiceTransactionMust
     ServiceTransactionMust : +String sale-name
     ServiceTransactionMust : +String sexual
