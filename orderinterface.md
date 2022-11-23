@@ -28,19 +28,18 @@ classDiagram
 
 ## 売上入力処理
 ```mermaid
-flowchart TB
-    start-->saleslip-date-set
-    saleslip-date-set-->saler-name-input
-    loop inputend
-         product-name-get
-         product-name-get-->product-len-get
-         product-len-get-->product-amount-get
-         product-amount-get-->product-note-get
-         product-note-get-->sale-slip-product-append
+sequenceDiagram
+    Device->>Device: please saller name
+    loop ProductInput
+        Device->>Device: prodct name select
+        Device->>Device: prodct len input
+        Device->>Device: prodct amount input
+        Device->>Device: prodct note input
+        Device->>Device: prodcts ppend
     end
-    saleslip-data-->saleslip-save
-    saleslip-save-->append
+    Device-->>CalcCompute: SaleSlipAppend
 ```
+
 ## 売上データに保存
 ```mermaid
 flowchart TB
