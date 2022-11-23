@@ -1,4 +1,3 @@
-# 編集中
 
 ## 売上サンプル翻訳してみた(business program sample)
 

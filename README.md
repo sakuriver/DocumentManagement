@@ -7,3 +7,7 @@
 
 http://itdoc.hitachi.co.jp/manuals/3000/30003F5220/EEPG0267.HTM
 
+
+### 現実世界で使われている売上伝票として参考にしたもの
+
+https://www.kaunet.com/rakuraku/variation/00003006/
