@@ -45,5 +45,9 @@ classDiagram
 sequenceDiagram
     participant ConvertPc
     ConvertPc->>ConvertPc: input name to database name
+    ConvertPc->>ConvertPc: input sexual to database sexual    
+    ConvertPc->>ConvertPc: input age to database age    
     ConvertPc->>ConvertPc: input sale to database sale
+    ConvertPc->>ConvertPc: input servicename to database servicename
+
 ```
