@@ -12,12 +12,6 @@ classDiagram
     ServiceSaleTransaction : +deposit(amount) age
     ServiceSaleTransaction : +deposit(amount) sale
 
-    class ServiceTransactionMust
-    ServiceTransactionMust : +String sale-name
-    ServiceTransactionMust : +String sexual
-    ServiceTransactionMust : +deposit(amount) ages
-    ServiceTransactionMust : +deposit(amount) sale
-    ServiceTransactionMust : +String service-name 
 
 
 ```
