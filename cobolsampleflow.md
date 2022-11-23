@@ -16,8 +16,8 @@ classDiagram
     ServiceTransactionMust : +String sale-name
     ServiceTransactionMust : +String sexual
     ServiceTransactionMust : +deposit(amount) ages
-    ServiceSaleTransaction : +deposit(amount) sale
-    ServiceSaleTransaction : +String service-name 
+    ServiceTransactionMust : +deposit(amount) sale
+    ServiceTransactionMust : +String service-name 
 
 
 ```
