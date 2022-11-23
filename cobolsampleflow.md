@@ -1,4 +1,18 @@
 # 編集中
+
+
+```mermaid
+
+classDiagram
+    class BankAccount
+    BankAccount : +String owner
+    BankAccount : +Bigdecimal balance
+    BankAccount : +deposit(amount)
+    BankAccount : +withdrawal(amount)
+
+```
+
+# 
 ```mermaid
 flowchart TB
     c1-->a2
