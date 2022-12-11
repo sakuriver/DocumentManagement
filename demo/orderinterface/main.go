@@ -1,69 +1,118 @@
 package main
 
-import "fmt"
+import (
+	"encoding/csv"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 const taxRate = 0.1
 
 // 商品売上系の試し中
 func main() {
 
-	// 売上伝票のテスト用データ
-	saleSlipData := SaleSlipData{
-		SalerName: "佐藤　一郎",
-		SaleDate:  "2022年10月8日",
-		Products: []ProductInfo{
-			ProductInfo{
-				ProductName: "コンサートチケット 団体1式",
-				ProductLen:  10,
-				Amount:      2000,
-				Note:        "団体購入で一式購入者の名前です",
-			},
-			ProductInfo{
-				ProductName: "呪術廻戦 21",
-				ProductLen:  2,
-				Amount:      550,
-				Note:        "旅行の暇つぶし用です",
-			},
-		},
+	file, err := os.Open("./sale.csv")
+	if err != nil {
+		println("file open error")
+		return
 	}
 
-	displaySaleSlipHeader(saleSlipData.SalerName, saleSlipData.SaleDate)
+	r := csv.NewReader(file)
+	records, err := r.ReadAll()
+	if err != nil {
+		println(fmt.Sprintf("csv data read error %s", err.Error()))
+		return
+	}
 
-	totalPrice := productDetailDisplay(saleSlipData.Products)
+	saleSlipData := SaleSlipData{}
 
-	displaySaleSlipFooter(totalPrice)
+	for record := range records {
+		// 販売者のヘッダー情報を取得
+		cols := records[record]
+		saleSlipData.SalerName = cols[0]
+		saleSlipData.SaleDate = cols[1]
+		// 販売者の商品個別売り上げを読み込み
+		productFile, err := os.Open("./product.csv")
+		if err != nil {
+			println("product open error")
+			return
+		}
+		productR := csv.NewReader(productFile)
+		productRecords, err := productR.ReadAll()
+		if err != nil {
+			println(fmt.Sprintf("csv data read error %s", err.Error()))
+			return
+		}
+
+		// 商品情報の売上結果から取得する
+		for productRecord := range productRecords {
+			productLenI, _ := strconv.Atoi(productRecords[productRecord][1])
+			productAmountI, _ := strconv.Atoi(productRecords[productRecord][2])
+			saleSlipData.Products = append(saleSlipData.Products, ProductInfo{
+				ProductName: productRecords[productRecord][0],
+				ProductLen:  productLenI,
+				Amount:      productAmountI,
+				Note:        productRecords[productRecord][3],
+			})
+
+		}
+
+	}
+
+	// 売上伝票のテスト用データ
+
+	resultFile, err := os.Create("./file_result.csv")
+	defer resultFile.Close()
+
+	csvWriter := csv.NewWriter(resultFile)
+	displaySaleSlipHeader(csvWriter, saleSlipData.SalerName, saleSlipData.SaleDate)
+
+	totalPrice := productDetailDisplay(csvWriter, saleSlipData.Products)
+	displaySaleSlipFooter(csvWriter, totalPrice)
+
+	for {
+
+	}
+
 }
 
 //displaySaleSlipHeader 売上伝票の上部を表示する
-func displaySaleSlipHeader(salerName string, saleDate string) {
-	println("売上伝票情報")
-	println(fmt.Sprintf("購入者名 %s 購入日 %s", salerName, saleDate))
-	println("")
-	println("")
-	println("")
+func displaySaleSlipHeader(csvWriter *csv.Writer, salerName string, saleDate string) {
+	headers := []string{"売上伝票情報"}
 
-	println("商品一覧")
+	csvWriter.Write(headers)
+	csvWriter.Write([]string{fmt.Sprintf("購入者名 %s 購入日 %s", salerName, saleDate)})
+	csvWriter.Write([]string{""})
+	csvWriter.Write([]string{""})
+	csvWriter.Flush()
 
 }
 
-func displaySaleSlipFooter(totalPrice float64) {
+//displaySaleSlipFooter 売上伝票のフッターを表示する
+func displaySaleSlipFooter(csvWriter *csv.Writer, totalPrice float64) {
 	//
-	println("")
-	println("")
-	println("")
-	println(fmt.Sprintf("商品合計金額 %d円", (int64)(totalPrice)))
-	println(fmt.Sprintf("消費税 %d円", (int64)(totalPrice*taxRate)))
-	println(fmt.Sprintf("合計金額 %d円", (int64)(totalPrice+(totalPrice*taxRate))))
+	csvWriter.Write([]string{""})
+	csvWriter.Write([]string{""})
+	csvWriter.Write([]string{""})
+	csvWriter.Write([]string{fmt.Sprintf("商品合計金額 %d円", (int64)(totalPrice))})
+	csvWriter.Write([]string{fmt.Sprintf("消費税 %d円", (int64)(totalPrice*taxRate))})
+	csvWriter.Write([]string{fmt.Sprintf("商品合計金額 %d円", (int64)(totalPrice))})
+	csvWriter.Write([]string{fmt.Sprintf("合計金額 %d円", (int64)(totalPrice+(totalPrice*taxRate)))})
+	csvWriter.Flush()
 
 }
 
-// 商品の詳細画面を表示する
-func productDetailDisplay(products []ProductInfo) float64 {
+//productDetailDisplay 商品の詳細ぶぶんの表示と書き込みを表示する
+func productDetailDisplay(csvWriter *csv.Writer, products []ProductInfo) float64 {
 	totalPrice := 0.0
+	csvWriter.Write([]string{"商品名", "個数", "金額", "備考"})
 	for _, product := range products {
-		println(fmt.Sprintf("商品名 %s 個数 %d 金額 %d 備考 %s", product.ProductName, product.ProductLen, product.Amount*product.ProductLen, product.Note))
+		csvWriter.Write([]string{product.ProductName, fmt.Sprintf("%d", product.ProductLen), fmt.Sprintf("%d", product.Amount*product.ProductLen), product.Note})
+		println(fmt.Sprintf("%s,%d,%d,%s", product.ProductName, product.ProductLen, product.Amount*product.ProductLen, product.Note))
 		totalPrice += float64(product.Amount * product.ProductLen)
 	}
+	csvWriter.Flush()
 	return totalPrice
 }
 
