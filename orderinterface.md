@@ -52,9 +52,9 @@ flowchart TB
 
 ##### 定数値一覧
 
-|  名称  | 設定内容 |
+|  名称  |  設定内容  |
 | ---- | ---- |
-|  taxRate |  消費税率 1を100%として1-0.01を設定  | 
+|  taxRate  |  消費税率 1を100%として1-0.01を設定  | 
 
 ## 入力ファイル
 
@@ -73,11 +73,10 @@ sale.csv
 
 ##### ファイルデータ構造
 
-|  列番号(1始まり)  |  名称  |
-| 概要 |
+|  列番号(1始まり)  |  名称  |  概要  |
 | ---- | ---- | ---- |
-|  1 |  購入者名  |  商品を購入した人の名前。表示名をわけないときは、アカウントidを格納 SalesSlipData.saler-name |
-|  2 | 購入日時   |  商品を購入したときの日時、帳票等に出力される SalesSlipData.sale-date |
+|  1  |  購入者名  |  商品を購入した人の名前。表示名をわけないときは、アカウントidを格納 SalesSlipData.saler-name  |
+|  2  |  購入日時  |  商品を購入したときの日時、帳票等に出力される SalesSlipData.sale-date  |
 
 ##### フォーマット説明
 1.300円のアイスクリームを10個購入した時に入ってくデータ例
@@ -96,13 +95,12 @@ SalesSlipProductInfoの内容が１行ずつ
 
 ##### ファイルデータ構造
 
-|  列番号(1始まり)  |  名称  |
-| 概要 |
+|  列番号(1始まり)  |  名称  |  概要  |
 | ---- | ---- | ---- |
-|  1 |  購入商品名  |  商品の名前 "2022年チケットなど" SalesSlipProductInfo.product-name |
-|  2 | 数量  |  商品を購入した数量、金額計算でも利用する SalesSlipProductInfo.product-len |
-|  3 |  単価  |  商品一つあたりの単価 SalesSlipProductInfo.amount |
-|  4 |  備考  |  商品そのものについての補足説明が記述される SalesSlipProductInfo.note  |
+|  1  |  購入商品名  |  商品の名前 "2022年チケットなど" SalesSlipProductInfo.product-name  |
+|  2  |  数量  |  商品を購入した数量、金額計算でも利用する SalesSlipProductInfo.product-len |
+|  3  |  単価  |  商品一つあたりの単価 SalesSlipProductInfo.amount  |
+|  4  |  備考  |  商品そのものについての補足説明が記述される SalesSlipProductInfo.note  |
 
 
 ##### フォーマット説明
