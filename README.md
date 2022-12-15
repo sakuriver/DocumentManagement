@@ -60,8 +60,10 @@ https://www.mapion.co.jp/phonebook/M26040/01561/20130860929/
 ### demo(デモ)
 #### orderinterface売上注文情報受け取り
 ##### サンプル(go言語)
-
-
+### common(共通モジュール格納用)
+### systemDefineDocument(本システムにおける定義資料まとめ)
+#### term(各変数について、用語内の説明)
+#### test(テストの用語についての定義)
 ## 引用資料
 
 ### COBOL移植用サンプルとして使った資料
