@@ -74,6 +74,7 @@ sale.csv
 
 |  列番号(1始まり)  |  名称  |
 | 概要 |
+| ---- | ---- | ---- |
 |  1 |  購入者名  |  商品を購入した人の名前。表示名をわけないときは、アカウントidを格納 SalesSlipData.saler-name |
 |  2 | 購入日時   |  商品を購入したときの日時、帳票等に出力される SalesSlipData.sale-date |
 
@@ -96,6 +97,7 @@ SalesSlipProductInfoの内容が１行ずつ
 
 |  列番号(1始まり)  |  名称  |
 | 概要 |
+| ---- | ---- | ---- |
 |  1 |  購入商品名  |  商品の名前 "2022年チケットなど" SalesSlipProductInfo.product-name |
 |  2 | 数量  |  商品を購入した数量、金額計算でも利用する SalesSlipProductInfo.product-len |
 |  3 |  単価  |  商品一つあたりの単価 SalesSlipProductInfo.amount |
