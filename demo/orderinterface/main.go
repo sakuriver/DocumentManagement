@@ -69,7 +69,8 @@ func main() {
 	defer resultFile.Close()
 
 	csvWriter := csv.NewWriter(resultFile)
-	displaySaleSlipHeader(csvWriter, saleSlipData.SalerName, saleSlipData.SaleDate)
+	displaySaleSlipHeader(csvWriter)
+	writeSaleSlipHeader(csvWriter, saleSlipData.SalerName, saleSlipData.SaleDate)
 
 	// 合計金額を計算する
 	totalPrice := ordermath.CalcTotalPrice(saleSlipData.Products)
@@ -83,8 +84,13 @@ func main() {
 }
 
 //displaySaleSlipHeader 売上伝票の上部を表示する
-func displaySaleSlipHeader(csvWriter *csv.Writer, salerName string, saleDate string) {
+func displaySaleSlipHeader(csvWriter *csv.Writer) {
 	println("sale slip header start")
+
+}
+
+//writeSaleSlipHeader 売上伝票の上部をファイル出力する
+func writeSaleSlipHeader(csvWriter *csv.Writer, salerName string, saleDate string) {
 	headers := []string{"売上伝票情報"}
 
 	csvWriter.Write(headers)
